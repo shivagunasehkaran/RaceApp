@@ -1,13 +1,13 @@
 import React, {useMemo} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
-import {styles} from './ChildCoffeeExtras.style';
+import {styles} from './RaceItem.style';
 import CountdownTimer from '../../utils/countdownTimer';
 
-type ChildCoffeeExtrasProp = {
-  item: Object,
-  index: number,
-  onPress: Function,
-  selectedIndex: number,
+type RaceItemProp = {
+  item: Object;
+  index: number;
+  onPress: Function;
+  selectedIndex: number;
 };
 
 const categoryData = [
@@ -23,7 +23,7 @@ const categoryDescriptionData = {
 };
 
 // child flatlist render item
-const ChildCoffeeExtras = (props: ChildCoffeeExtrasProp) => {
+const RaceItem = (props: RaceItemProp) => {
   // getting data from parent
   let items = props?.item;
   let itemIndex = props?.index;
@@ -67,11 +67,15 @@ const ChildCoffeeExtras = (props: ChildCoffeeExtrasProp) => {
           <View style={styles.parentLine}>
             <Text style={styles.line} />
           </View>
-          <Text>{categoryDescriptionData[items.category_id]}</Text>
+          <View style={styles.category}>
+            <Text style={styles.categoryText}>
+              {categoryDescriptionData[items.category_id]}
+            </Text>
+          </View>
         </View>
       )}
     </View>
   );
 };
 
-export default ChildCoffeeExtras;
+export default RaceItem;

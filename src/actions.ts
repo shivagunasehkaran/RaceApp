@@ -1,7 +1,7 @@
 import {FETCHING_DATA} from './constants';
 
-export function fetchData() {
+export const fetchData = () => {
   return {
     type: FETCHING_DATA,
   };
-}
+};

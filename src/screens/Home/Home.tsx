@@ -8,18 +8,18 @@ import {
   View,
 } from 'react-native';
 import {styles} from './Home.style';
-import ChildCoffeeExtras from '../../components/ChildCoffeeExtras';
 import {fetchData} from '../../actions';
 import {useDispatch, useSelector} from 'react-redux';
-import {ConstantText} from '../../utils/ConstantText';
+import RaceItem from '../../components/RaceItem/RaceItem';
+import {ConstantText} from '../../constants';
 
 const Home = () => {
-  const [raceArray, setRaceArray] = useState([]);
-  const [formatedRaceArray, setFormatedRaceArray] = useState([]);
-  const [selectedIndex, setSelectedIndex] = useState(null);
   const dispatch = useDispatch();
   const isLoading = useSelector(state => state.appData.isFetching);
   const data = useSelector(state => state.appData.data);
+
+  const [raceArray, setRaceArray] = useState([]);
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   // sort data based on start time
   const sortedData = useMemo(() => {
@@ -35,8 +35,6 @@ const Home = () => {
       return 0;
     });
   }, [raceArray]);
-
-  const prepareRaceData = () => {};
 
   useEffect(() => {
     if (data.status === 200) {
@@ -58,8 +56,8 @@ const Home = () => {
   );
 
   // child render item
-  const childListRenderItem = ({item, index}) => (
-    <ChildCoffeeExtras
+  const renderItem = ({item, index}) => (
+    <RaceItem
       item={item}
       index={index}
       onPress={renderAccordian}
@@ -68,7 +66,7 @@ const Home = () => {
   );
 
   // child KeyExtractor
-  const keyExtractor = (index: any) => String(index);
+  const keyExtractor = (item: any) => String(item.race_id);
 
   return (
     <View style={styles.container}>
@@ -83,8 +81,8 @@ const Home = () => {
         <View style={styles.flatListView}>
           {isLoading && <ActivityIndicator size={ConstantText.loader_large} />}
           <FlatList
-            data={sortedData}
-            renderItem={childListRenderItem}
+            data={sortedData.slice(0, 5)}
+            renderItem={renderItem}
             keyExtractor={keyExtractor}
           />
         </View>

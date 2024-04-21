@@ -1,9 +1,6 @@
-// library imports
 import {StyleSheet} from 'react-native';
-// styles imports
 import {ColourPalette} from '../../assets/styles/ColourPalette';
-import { ConstantText } from '../../utils/ConstantText';
-// utill imports
+import {ConstantText} from '../../constants';
 
 export const styles = StyleSheet.create({
   container: {
@@ -19,7 +16,6 @@ export const styles = StyleSheet.create({
   meeting: {
     flex: 1,
     paddingVertical: 10,
-
   },
   meetingName: {
     margin: 20,
@@ -67,5 +63,16 @@ export const styles = StyleSheet.create({
     backgroundColor: ColourPalette.white,
     height: 1,
     marginHorizontal: 20,
+  },
+  category: {
+    height: 20,
+    justifyContent: 'center',
+    marginHorizontal: 20,
+  },
+  categoryText: {
+    color: ColourPalette.black,
+    fontSize: 12,
+    fontFamily: ConstantText.font_family2,
+    fontWeight: ConstantText.font_bold2,
   },
 });

@@ -1,7 +1,7 @@
 // react library imports
 import {StyleSheet} from 'react-native';
-import {ConstantText} from '../../utils/ConstantText';
 import {ColourPalette} from '../../assets/styles/ColourPalette';
+import {ConstantText} from '../../constants';
 
 export const styles = StyleSheet.create({
   container: {
@@ -26,6 +26,6 @@ export const styles = StyleSheet.create({
   },
   flatListView: {
     margin: 10,
-    bottom: 50,
+    bottom: 20,
   },
 });
