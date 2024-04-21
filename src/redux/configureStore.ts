@@ -1,5 +1,5 @@
 import {legacy_createStore as createStore, applyMiddleware} from 'redux';
-import app from '../reducers';
+import app from './reducers';
 
 import createSagaMiddleware from 'redux-saga';
 import dataSaga from './saga';
