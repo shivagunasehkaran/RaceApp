@@ -1,7 +1,7 @@
 import React from 'react';
 import Home from './screens/Home/Home';
 import {Provider} from 'react-redux';
-import configureStore from './configureStore';
+import configureStore from './redux/configureStore';
 
 const store = configureStore();
 

@@ -3,8 +3,8 @@ import {
   FETCHING_DATA,
   FETCHING_DATA_FAILURE,
   FETCHING_DATA_SUCCESS,
-} from './constants';
-import {getRacesDetails} from './services/Services';
+} from '../utils/constants';
+import {getRacesDetails} from '../services/Services';
 
 function* fetchData() {
   try {

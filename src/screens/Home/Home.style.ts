@@ -1,7 +1,7 @@
 // react library imports
 import {StyleSheet} from 'react-native';
 import {ColourPalette} from '../../assets/styles/ColourPalette';
-import {ConstantText} from '../../constants';
+import {ConstantText} from '../../utils/constants';
 
 export const styles = StyleSheet.create({
   container: {

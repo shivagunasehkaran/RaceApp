@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -8,10 +8,11 @@ import {
   View,
 } from 'react-native';
 import {styles} from './Home.style';
-import {fetchData} from '../../actions';
+import {fetchData} from '../../redux/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import RaceItem from '../../components/RaceItem/RaceItem';
-import {ConstantText} from '../../constants';
+import {ConstantText} from '../../utils/constants';
+import useSortedData from './Hooks/useSortedData';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -21,20 +22,20 @@ const Home = () => {
   const [raceArray, setRaceArray] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(null);
 
-  // sort data based on start time
-  const sortedData = useMemo(() => {
-    if (!raceArray) {
-      return [];
-    }
-    return raceArray?.sort((a, b) => {
-      if (a?.advertised_start?.seconds && b?.advertised_start?.seconds) {
-        return a.advertised_start?.seconds > b.advertised_start?.seconds
-          ? 1
-          : -1;
-      }
-      return 0;
-    });
-  }, [raceArray]);
+  const {sortedData} = useSortedData(raceArray);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRaceArray(prevData => {
+        if (prevData.length > 1) {
+          return prevData.slice(1);
+        } else {
+          return [];
+        }
+      });
+    }, 60000); // 60 seconds
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     if (data.status === 200) {

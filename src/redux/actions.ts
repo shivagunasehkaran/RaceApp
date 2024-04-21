@@ -1,4 +1,4 @@
-import {FETCHING_DATA} from './constants';
+import {FETCHING_DATA} from '../utils/constants';
 
 export const fetchData = () => {
   return {

@@ -1,4 +1,4 @@
-import {GET_URL} from '../constants';
+import {GET_URL} from '../utils/constants';
 
 export const getRacesDetails = async () => {
   const url = GET_URL.RACE_DETAILS_URL;
