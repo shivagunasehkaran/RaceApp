@@ -5,7 +5,7 @@ import {
 } from '../../utils/constants';
 
 const initialState = {
-  data: [],
+  raceData: [],
   isFetching: false,
   error: false,
 };
@@ -15,14 +15,14 @@ const dataReducer = (state = initialState, action) => {
     case FETCHING_DATA:
       return {
         ...state,
-        data: [],
+        raceData: [],
         isFetching: true,
       };
     case FETCHING_DATA_SUCCESS:
       return {
         ...state,
         isFetching: false,
-        data: action.data,
+        raceData: action.raceData,
       };
     case FETCHING_DATA_FAILURE:
       return {

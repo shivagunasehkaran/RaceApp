@@ -17,7 +17,7 @@ import useSortedData from './Hooks/useSortedData';
 const Home = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(state => state.appData.isFetching);
-  const data = useSelector(state => state.appData.data);
+  const raceData = useSelector(state => state.appData.raceData);
 
   const [raceArray, setRaceArray] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(null);
@@ -33,16 +33,16 @@ const Home = () => {
           return [];
         }
       });
-    }, 60000); // 60 seconds
+    }, 6000); // 60 seconds
     return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
-    if (data.status === 200) {
-      const newArr = Object.values(data.data.race_summaries);
+    if (raceData.status === 200) {
+      const newArr = Object.values(raceData.data.race_summaries);
       setRaceArray(newArr);
     }
-  }, [data]);
+  }, [raceData]);
 
   // expand the flatlist item
   const renderAccordian = useCallback(

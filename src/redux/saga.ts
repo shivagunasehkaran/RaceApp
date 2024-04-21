@@ -8,8 +8,8 @@ import {getRacesDetails} from '../services/Services';
 
 function* fetchData() {
   try {
-    const data = yield getRacesDetails();
-    yield put({type: FETCHING_DATA_SUCCESS, data});
+    const raceData = yield getRacesDetails();
+    yield put({type: FETCHING_DATA_SUCCESS, raceData});
   } catch (e) {
     yield put({type: FETCHING_DATA_FAILURE});
   }
