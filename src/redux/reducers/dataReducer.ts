@@ -1,16 +1,26 @@
+import {Race} from '../../models/race';
 import {
   FETCHING_DATA,
   FETCHING_DATA_SUCCESS,
   FETCHING_DATA_FAILURE,
 } from '../../utils/constants';
 
-const initialState = {
+export type RaceState = {
+  raceData: Race[];
+  isFetching: boolean;
+  error: boolean;
+};
+
+const initialState: RaceState = {
   raceData: [],
   isFetching: false,
   error: false,
 };
 
-const dataReducer = (state = initialState, action) => {
+const dataReducer = (
+  state = initialState,
+  action: {type: string; raceData: Race[]},
+) => {
   switch (action.type) {
     case FETCHING_DATA:
       return {

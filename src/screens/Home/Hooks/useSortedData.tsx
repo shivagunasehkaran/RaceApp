@@ -1,6 +1,7 @@
 import {useMemo} from 'react';
+import {Race} from '../../../models/race';
 
-const useSortedData = raceArray => {
+const useSortedData = (raceArray: Race[]) => {
   // sort data based on start time
   const sortedData = useMemo(() => {
     if (!raceArray) {

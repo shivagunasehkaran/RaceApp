@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {FC, useCallback, useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -13,11 +13,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import RaceItem from '../../components/RaceItem/RaceItem';
 import {ConstantText} from '../../utils/constants';
 import useSortedData from './Hooks/useSortedData';
+import {RootState} from '../../redux/reducers';
+import {Race} from '../../models/race';
 
-const Home = () => {
+const Home: FC = () => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(state => state.appData.isFetching);
-  const raceData = useSelector(state => state.appData.raceData);
+  const isLoading = useSelector((state: RootState) => state.appData.isFetching);
+  const raceData = useSelector((state: RootState) => state.appData.raceData);
 
   const [raceArray, setRaceArray] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(null);
@@ -38,15 +40,15 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    if (raceData.status === 200) {
-      const newArr = Object.values(raceData.data.race_summaries);
+    if (raceData?.status === 200) {
+      const newArr = Object.values(raceData?.data?.race_summaries);
       setRaceArray(newArr);
     }
   }, [raceData]);
 
   // expand the flatlist item
   const renderAccordian = useCallback(
-    items => {
+    (items: Race) => {
       if (selectedIndex === items.race_id) {
         setSelectedIndex(null);
       } else {
