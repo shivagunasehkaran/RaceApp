@@ -68,7 +68,7 @@ const Home = () => {
   );
 
   // child KeyExtractor
-  const keyExtractor = (item, index) => String(index);
+  const keyExtractor = (index: any) => String(index);
 
   return (
     <View style={styles.container}>

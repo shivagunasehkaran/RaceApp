@@ -3,13 +3,13 @@ import {useEffect, useState} from 'react';
 const CountdownTimer = (startTime: number) => {
   const now = new Date().getTime();
   const secToMilliSec = startTime * 1000;
-  const timeRemaining = now - secToMilliSec;
-  const [remainingTime, setRemainingTime] = useState(now - secToMilliSec);
+  const timeRemaining = secToMilliSec - now;
+  const [remainingTime, setRemainingTime] = useState(secToMilliSec - now);
 
   useEffect(() => {
     const interval = setInterval(() => {
       // Update remaining time every second
-      setRemainingTime(now - secToMilliSec);
+      setRemainingTime(secToMilliSec - now);
     }, 1000);
 
     // Clear interval when component unmounts

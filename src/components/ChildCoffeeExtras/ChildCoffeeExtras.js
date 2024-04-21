@@ -1,8 +1,7 @@
-import React, {useCallback, useMemo, useState} from 'react';
-import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
-import NestedChildCoffeeExtras from '../NestedChildCoffeeExtras/NestedChildCoffeeExtras';
+import React, {useMemo} from 'react';
+import {Text, TouchableOpacity, View} from 'react-native';
 import {styles} from './ChildCoffeeExtras.style';
-import CountdownTimer from '../../utils/CountdownTimer';
+import CountdownTimer from '../../utils/countdownTimer';
 
 type ChildCoffeeExtrasProp = {
   item: Object,
@@ -25,8 +24,6 @@ const categoryDescriptionData = {
 
 // child flatlist render item
 const ChildCoffeeExtras = (props: ChildCoffeeExtrasProp) => {
-  const [selectedIndex, setSelectedIndex] = useState(-1);
-
   // getting data from parent
   let items = props?.item;
   let itemIndex = props?.index;
@@ -34,40 +31,6 @@ const ChildCoffeeExtras = (props: ChildCoffeeExtrasProp) => {
   let meetingName = items?.meeting_name;
   let raceNumber = items?.race_number;
   let startingTime = items?.advertised_start?.seconds;
-
-  // set index for accordian based in selection
-  const setIndexForAccordian = (item, index) => {
-    if (selectedIndex === index) {
-      setSelectedIndex(-1);
-    } else {
-      setSelectedIndex(index);
-    }
-  };
-
-  // nested child render item
-  const childListRenderItem = ({item, index}) => {
-    // getting data from parent
-    let items = props.item ? props.item : null;
-    let name = items ? items.name : '';
-
-    return (
-      <View style={styles.container}>
-        <View style={styles.nameView}>
-          <Text style={styles.name}>{name}</Text>
-        </View>
-      </View>
-    );
-  };
-
-  // <NestedChildCoffeeExtras
-  //   item={item}
-  //   index={index}
-  //   onPress={() => setIndexForAccordian(item, index)}
-  //   selectedIndex={selectedIndex}
-  // />
-
-  // child KeyExtractor
-  const keyExtractor = (item, index) => String(index);
 
   const isEnabled = useMemo(() => {
     return categoryData.includes(items.category_id);
@@ -105,11 +68,6 @@ const ChildCoffeeExtras = (props: ChildCoffeeExtrasProp) => {
             <Text style={styles.line} />
           </View>
           <Text>{categoryDescriptionData[items.category_id]}</Text>
-          {/* <FlatList
-            data={dataSource}
-            renderItem={childListRenderItem}
-            keyExtractor={keyExtractor}
-          /> */}
         </View>
       )}
     </View>
