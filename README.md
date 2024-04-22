@@ -1,79 +1,89 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Next To Go Races
 
-# Getting Started
+This race app allows you to check the latest racing game updates. 
+It has the details of game details and timings such as race name, race number and starting time with the coundown timer.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+Please go ahead and play around  :)
 
-## Step 1: Start the Metro Server
+## Covered :
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+  - There a button in landing screen called "Click to see Next To Go races", once you clicking on the button you will be able to the race details in list.
+  - Fetches list of race details from API (https://api.neds.com.au/rest/v1/racing/?method=nextraces&count=10) and displays a list of race details.
+  - Show race details in Flatlist (race name, race number and starting time)
+  - User only can see 5 race items in the list all the time
+  - List displayed in ascending order based on starting time
+  - First race item will get disapperared after 6 seconds
+  - When user press race list item, will be able to see the race categories based on "category_id" in the toggle view.
+  - Used **Redux** for state management.
+  - Project working on both Android and iOS
+  - Project running on latest RN 0.73.7
+  - Designed basic UI for better understanding
 
-To start Metro, run the following command from the _root_ of your React Native project:
+## Not Covered :  Willing to implement in the future.
 
-```bash
-# using npm
-npm start
+  - I tried to implement the countdown timer accurately, however facing some issue in timer logic and couldn’t remove the item based on the starting time.
+  - Instead removed item in 6 seconds
+  - I still have some doubt in displaying categories whether i understood properly or not, based on time constraints i couldn't ask doubt on Friday. Sorry for that :(
+    
+## Grading criteria followed:
 
-# OR using Yarn
-yarn start
-```
+  - **Architecture and approach** - (Using **Container and View pattern** for design pattern and proper folder structure Architecture && tried TDD approach)
+  - **Execution** - App runs successfully in both Android and iOS
+  - **Testability** - Used **Jest** for Unit testing and **@testing-library/react-native** for component testing.
+  - **Code readability and style** - Written clean code and very convenient to read. Kept style files wisely. 
+    (Tried to use all latest methods)
 
-## Step 2: Start your Application
+## How to setup code :
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+- Step 1 : 	download code from repo
 
-### For Android
+- Step 2 : 	remove **yarn.lock** file from download code
 
-```bash
-# using npm
-npm run android
+- Step 3 : 	do **npm install** or **yarn install** ( if you have configured **yarn** in your project )
 
-# OR using Yarn
-yarn android
-```
+  ### If you want to run in iOS :-
 
-### For iOS
+      -  pod install ( all of your packages to be installed in your Pod file )
 
-```bash
-# using npm
-npm run ios
+      -  yarn run ios or react-native run-ios ( app will run in your simulator or connected iOS device )
+      
+      
+  ### If you want to run in Android :-
 
-# OR using Yarn
-yarn ios
-```
+      -  open your android studio and make sure your gradle getting success ( all of your packages to be synced in your gradle )
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+      -  yarn run ios or react-native run-android ( app will run in your emulator or connected Android device )
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+## Packages used : (Technologies)
 
-## Step 3: Modifying your App
+  Project is created with:
 
-Now that you have successfully run the app, let's modify it.
+  - react "18.2.0"
+  - react-native "0.73.7",
+  - typescript "5.0.4"
+  - redux "^4.0.5",
+  - react-redux "^7.2.0",
+  - redux-saga "^1.1.3"
+  - redux-mock-store "^1.5.4",
+  - jest "^29.6.3" - devDependencies
+  - @testing-library/react-native "^12.4.5" - devDependencies
+  - used Prettier for code formatting
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+## Thinking & Decisions :
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+  - For API calls used "Fetch", since we have only one api call i decided to use "Fetch", if we have further nested API call i would rather go with "axios"
+  - I have used "Redux" to pass the data throughout the application and used memoizations (Prefered "redux-saga" for app scalability)
+       ("Using the following rule of thumb: don’t use memoization if you can’t quantify the performance gains.")
+  - Always prefer to use hooks and created custom hooks for business logic
+  - Handled all the "NULL" checks in all components
+  - Provided Loader (Activity indicator) before API calling. Loader will shown in upper middle of the screen, just for user interaction.
+  - Created ColourPalette for maintaining colors
+  - Created constants for maintaining all application hardcoded text
+  - Created Constant file for maintaining API url's
 
-## Congratulations! :tada:
+## outputs :
 
-You've successfully run and modified your React Native App. :partying_face:
+https://github.com/shivagunasehkaran/RaceApp/assets/11419839/be9b06e2-d320-4557-be3d-b379c74da0a8
 
-### Now what?
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## Happy coding ...
