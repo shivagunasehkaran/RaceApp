@@ -1,25 +1,18 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, memo} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {styles} from './RaceItem.style';
-import CountdownTimer from '../../utils/countdownTimer';
+import {
+  AppStrings,
+  CategoryData,
+  CategoryDescriptionData,
+} from '../../utils/constants';
+import useCountdownTimer from '../../utils/useCountdownTimer';
 
 type RaceItemProp = {
   item: Object;
   index: number;
   onPress: Function;
   selectedIndex: number;
-};
-
-const categoryData = [
-  '9daef0d7-bf3c-4f50-921d-8e818c60fe61',
-  '161d9be2-e909-4326-8c2c-35ed71fb460b',
-  '4a2788f8-e825-4d36-9894-efd4baf1cfae',
-];
-
-const categoryDescriptionData = {
-  '9daef0d7-bf3c-4f50-921d-8e818c60fe61': 'Greyhound racing',
-  '161d9be2-e909-4326-8c2c-35ed71fb460b': 'Harness racing',
-  '4a2788f8-e825-4d36-9894-efd4baf1cfae': 'Horse racing',
 };
 
 // child flatlist render item
@@ -33,7 +26,7 @@ const RaceItem = (props: RaceItemProp) => {
   let startingTime = items?.advertised_start?.seconds;
 
   const isEnabled = useMemo(() => {
-    return categoryData.includes(items.category_id);
+    return CategoryData.includes(items?.category_id);
   }, [items]);
 
   return (
@@ -49,16 +42,16 @@ const RaceItem = (props: RaceItemProp) => {
               <Text style={styles.meetingNameText}>{meetingName}</Text>
             </View>
             <View style={styles.raceNumber}>
-              <Text
-                style={
-                  styles.raceNumberText
-                }>{`Race number : ${raceNumber}`}</Text>
+              <Text style={styles.raceNumberText}>
+                {AppStrings.raceNumber} {raceNumber}
+              </Text>
             </View>
           </View>
           <View style={styles.timer}>
-            <Text style={styles.timerText}>{`Race starts in : ${CountdownTimer(
-              startingTime,
-            )}`}</Text>
+            <Text style={styles.timerText}>
+              {AppStrings.raceStartsIn}
+              {useCountdownTimer(startingTime)}
+            </Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -69,7 +62,7 @@ const RaceItem = (props: RaceItemProp) => {
           </View>
           <View style={styles.category}>
             <Text style={styles.categoryText}>
-              {categoryDescriptionData[items.category_id]}
+              {CategoryDescriptionData[items.category_id]}
             </Text>
           </View>
         </View>
@@ -78,4 +71,4 @@ const RaceItem = (props: RaceItemProp) => {
   );
 };
 
-export default RaceItem;
+export default memo(RaceItem);

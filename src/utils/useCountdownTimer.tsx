@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 
-const CountdownTimer = (startTime: number) => {
+const useCountdownTimer = (startTime: number) => {
   const now = new Date().getTime();
   const secToMilliSec = startTime * 1000;
   const timeRemaining = secToMilliSec - now;
@@ -26,4 +26,4 @@ const CountdownTimer = (startTime: number) => {
   return `${hours}h ${minutes}m ${seconds}s`;
 };
 
-export default CountdownTimer;
+export default useCountdownTimer;

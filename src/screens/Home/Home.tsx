@@ -11,7 +11,7 @@ import {styles} from './Home.style';
 import {fetchData} from '../../redux/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import RaceItem from '../../components/RaceItem/RaceItem';
-import {ConstantText} from '../../utils/constants';
+import {AppStrings, ConstantText} from '../../utils/constants';
 import useSortedData from './Hooks/useSortedData';
 import {RootState} from '../../redux/reducers';
 import {Race} from '../../models/race';
@@ -35,7 +35,7 @@ const Home: FC = () => {
           return [];
         }
       });
-    }, 6000); // 60 seconds
+    }, 6000); // 6 seconds for time being
     return () => clearInterval(interval);
   }, []);
 
@@ -69,7 +69,7 @@ const Home: FC = () => {
   );
 
   // child KeyExtractor
-  const keyExtractor = (item: any) => String(item.race_id);
+  const keyExtractor = (item: number) => String(item.race_id);
 
   return (
     <View style={styles.container}>
@@ -77,9 +77,7 @@ const Home: FC = () => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => dispatch(fetchData())}>
-          <Text style={styles.buttonText}>
-            {'Click to see Next To Go races'}
-          </Text>
+          <Text style={styles.buttonText}>{AppStrings.raceStartButton}</Text>
         </TouchableOpacity>
         <View style={styles.flatListView}>
           {isLoading && <ActivityIndicator size={ConstantText.loader_large} />}
